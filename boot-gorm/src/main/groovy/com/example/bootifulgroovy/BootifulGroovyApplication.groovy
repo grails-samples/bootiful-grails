@@ -3,6 +3,7 @@ package com.example.bootifulgroovy
 import grails.gorm.annotation.Entity
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import org.grails.orm.hibernate.HibernateDatastore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.SpringApplication
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView
 @SpringBootApplication
 class BootifulGroovyApplication {
 
+    @Autowired HibernateDatastore hibernateDatastore
     static void main(String[] args) {
         SpringApplication.run BootifulGroovyApplication, args
     }
@@ -69,6 +71,7 @@ class ReservationMvcController {
 interface ReservationRepository  {
     Collection<Reservation> findByReservationName(String reservationName)
     Collection<Reservation> findAll()
+    Reservation save(Reservation reservation)
 }
 
 @Entity
