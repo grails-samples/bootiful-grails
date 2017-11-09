@@ -24,11 +24,20 @@ repositories {
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-groovy-templates')
-	compile('org.codehaus.groovy:groovy')
-	runtime('com.h2database:h2')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile("org.grails:grails-datastore-gorm-hibernate-core:6.1.8.RELEASE") {
+		exclude group:'org.hibernate', module:'hibernate-core'
+		exclude group:'org.hibernate', module:'hibernate-validator'
+		exclude group:'org.hibernate', module:'hibernate-ehcache'
+		exclude group:'org.hibernate', module:'hibernate-commons-annotations'
+	}
+	compile "org.springframework.boot:spring-boot-starter"
+	compile "org.springframework.boot:spring-boot-starter-web"
+	compile "org.springframework.boot:spring-boot-autoconfigure"
+	compile "org.springframework.boot:spring-boot-starter-tomcat"
+	compile "org.grails:gorm-hibernate5-spring-boot:6.1.8.RELEASE"
+	compile "org.hibernate:hibernate-core:5.1.0.Final"
+	compile "org.hibernate:hibernate-ehcache:5.1.0.Final"
+
+	runtime "com.h2database:h2:1.4.192"
+	runtime "org.apache.tomcat:tomcat-jdbc:8.5.0"
 }
