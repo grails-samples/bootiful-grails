@@ -1,6 +1,7 @@
 package com.example.bootifulgroovy
 
 import grails.gorm.annotation.Entity
+import groovy.transform.CompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import org.grails.orm.hibernate.HibernateDatastore
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView
 
 
 @SpringBootApplication
+@CompileStatic
 class BootifulGroovyApplication {
 
     @Autowired HibernateDatastore hibernateDatastore
@@ -31,7 +33,7 @@ class BootifulGroovyApplication {
     def initializer(ReservationRepository repository) {
         { args ->
 
-            ["Jeff", "Nicki", "Josh"].forEach { repository.save(new Reservation(reservationName: it)) }
+            ["Jeff", "Nicki", "Josh"].forEach { String name -> repository.save(new Reservation(reservationName: name)) }
 
             repository.findAll().forEach { println it }
 
@@ -40,6 +42,7 @@ class BootifulGroovyApplication {
 }
 
 @RestController
+@CompileStatic
 class ReservationRestController {
 
     @Autowired
@@ -57,6 +60,7 @@ class ReservationRestController {
 }
 
 @Controller
+@CompileStatic
 class ReservationMvcController {
 
     @Autowired
@@ -78,6 +82,7 @@ interface ReservationRepository  {
 @Entity
 @ToString
 @EqualsAndHashCode
+@CompileStatic
 class Reservation {
     String reservationName
 }
