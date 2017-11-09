@@ -33,7 +33,7 @@ class BootifulGroovyApplication {
     def initializer(ReservationRepository repository) {
         { args ->
 
-            ["Jeff", "Nicki", "Josh"].forEach { String name -> repository.save(new Reservation(reservationName: name)) }
+            ["Jeff", "Nicki", "Josh"].forEach { String name -> repository.save(name) }
 
             repository.findAll().forEach { println it }
 
@@ -76,7 +76,7 @@ class ReservationMvcController {
 interface ReservationRepository  {
     Collection<Reservation> findByReservationName(String reservationName)
     Collection<Reservation> findAll()
-    Reservation save(Reservation reservation)
+    Reservation save(String reservationName)
 }
 
 @Entity
